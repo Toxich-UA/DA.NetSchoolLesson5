@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{BE729E64-EB1D-4CBD-9284-1A3B55B93DE5}</ProjectGuid>
+    <ProjectGuid>{299E0E7E-C819-4308-AC65-E189475750D7}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Lesson5Bank</RootNamespace>
-    <AssemblyName>Lesson5Bank</AssemblyName>
+    <RootNamespace>BankModel</RootNamespace>
+    <AssemblyName>BankModel</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -31,10 +31,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -47,15 +47,31 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IBankContext.cs" />
-    <Compile Include="Model\Addresses.cs" />
-    <Compile Include="Model\Cards.cs" />
-    <Compile Include="Model\Clients.cs" />
-    <Compile Include="Model\Operations.cs" />
+    <Compile Include="Context\BankDbContext.cs" />
+    <Compile Include="Context\Mappings\AddressesConfiguration.cs" />
+    <Compile Include="Context\Mappings\CardConfiguration.cs" />
+    <Compile Include="Context\Mappings\ClientConfiguration.cs" />
+    <Compile Include="Context\Mappings\OperationConfiguration.cs" />
+    <Compile Include="Migrations\201805151503481_InitialCreate.cs" />
+    <Compile Include="Migrations\201805151503481_InitialCreate.Designer.cs">
+      <DependentUpon>201805151503481_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\DbServices.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <EmbeddedResource Include="Migrations\201805151503481_InitialCreate.resx">
+      <DependentUpon>201805151503481_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Lesson5Bank.csproj">
+      <Project>{be729e64-eb1d-4cbd-9284-1a3b55b93de5}</Project>
+      <Name>Lesson5Bank</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
